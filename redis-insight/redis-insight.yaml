@@ -1,0 +1,14 @@
+#ddev-generated
+http:
+  routers:
+    redis-insight-https:
+      rule: HostRegexp(`redis-insight.DDEV_TLD`)
+      service: redis-insight-https
+      tls: true
+      entrypoints:
+        - http-443
+  services:
+    redis-insight-https:
+      loadBalancer:
+        servers:
+          - url: http://ddev-redis-insight:8001

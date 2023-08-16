@@ -1,0 +1,18 @@
+#ddev-generated
+services:
+  ddev-router:
+    ports:
+      - "127.0.0.1:8001:8001"
+  redis-insight:
+    container_name: ddev-redis-insight
+    image: redislabs/redisinsight:1.14.0
+    environment:
+      - RIPROXYENABLE=true
+      - RITRUSTEDORIGINS=https://redis-insight.${DDEV_TLD}
+    volumes:
+      - ddev-global-cache:/mnt/ddev-global-cache:rw
+    restart: "no"
+    expose:
+      - "8001"
+    networks:
+      - ddev_default

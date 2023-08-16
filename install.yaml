@@ -1,0 +1,17 @@
+name: redis-insight
+
+global_files:
+  - router-compose.override.yaml
+
+project_files:
+  - redis-insight/redis-insight.yaml
+  - scripts/add-traefik-config.bash
+  - scripts/start-redis-insight.bash
+  - scripts/stop-redis-insight.bash
+  - config.redis-insight.yaml
+
+post_install_actions:
+  - |
+    #ddev-description: Create a redis-insight project-dir
+    #
+    mkdir -p ~/.ddev/redis-insight
