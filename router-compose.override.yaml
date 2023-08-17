@@ -1,18 +1,23 @@
 #ddev-generated
 services:
-  ddev-router:
-    ports:
-      - "127.0.0.1:8001:8001"
   redis-insight:
     container_name: ddev-redis-insight
-    image: redislabs/redisinsight:1.14.0
-    environment:
-      - RIPROXYENABLE=true
-      - RITRUSTEDORIGINS=https://redis-insight.${DDEV_TLD}
+    image: oblakstudio/redis-insight:master
+    user: "${DDEV_UID}:${DDEV_GID}"
     volumes:
-      - ddev-global-cache:/mnt/ddev-global-cache:rw
+      - redis-insight:/home/node:rw
+    environment:
+      GNOME_KEYRING_PASS: "ddev"
+      CONNECTIONS_TIMEOUT_DEFAULT: "10000"
+      STDOUT_LOGGER: "true"
+      FILES_LOGGER: "false"
     restart: "no"
     expose:
-      - "8001"
+      - "5000"
     networks:
       - ddev_default
+    cap_add:
+      - IPC_LOCK
+volumes:
+  redis-insight:
+    name: ddev-redis-insight

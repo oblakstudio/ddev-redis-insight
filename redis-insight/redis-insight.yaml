@@ -11,4 +11,4 @@ http:
     redis-insight-https:
       loadBalancer:
         servers:
-          - url: http://ddev-redis-insight:8001
+          - url: http://ddev-redis-insight:5000

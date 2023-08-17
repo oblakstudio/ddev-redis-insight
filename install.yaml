@@ -5,8 +5,11 @@ global_files:
 
 project_files:
   - redis-insight/redis-insight.yaml
+  - scripts/common.bash
   - scripts/add-traefik-config.bash
   - scripts/start-redis-insight.bash
+  - scripts/setup-redis-insight.bash
+  - scripts/setup-redis-db.bash
   - scripts/stop-redis-insight.bash
   - config.redis-insight.yaml
 

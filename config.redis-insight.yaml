@@ -1,7 +1,10 @@
 #ddev-generated
 hooks:
+  pre-start:
+    - exec-host: ${DDEV_APPROOT}/.ddev/scripts/start-redis-insight.bash
   post-start:
-    - exec-host: "bash .ddev/scripts/start-redis-insight.bash"
-    - exec-host: "bash .ddev/scripts/add-traefik-config.bash"
-  pre-stop:
-    - exec-host: "bash .ddev/scripts/stop-redis-insight.bash"
+    - exec-host: ${DDEV_APPROOT}/.ddev/scripts/add-traefik-config.bash
+    - exec-host: ${DDEV_APPROOT}/.ddev/scripts/setup-redis-insight.bash
+    - exec-host: ${DDEV_APPROOT}/.ddev/scripts/setup-redis-db.bash
+  post-stop:
+    - exec-host: ${DDEV_APPROOT}/.ddev/scripts/stop-redis-insight.bash

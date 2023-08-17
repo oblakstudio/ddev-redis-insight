@@ -14,21 +14,18 @@ fi;
 
 
 if [ -n "$(ls -A "$INSIGHT_DIR")" ]; then
-    echo "Redis Insight is still running for other projects."
+	echo -e " \e[33mddev-redis-insight is running. If you want to stop it run 'ddev ri stop'.\e[0m"
     exit 0;
 fi;
 
 CONTAINER_ID=$(docker ps -q -f name="ddev-redis-insight")
 
-if [ -z "$CONTAINER_ID" ]; then
-    echo "Redis Insight is not running."
-    exit 0;
+if [ -n "$CONTAINER_ID" ]; then
+    printf " Container ddev-redis-insight "
+    docker container stop "$CONTAINER_ID" > /dev/null
+    printf " Stopped\n"
 fi;
 
 printf " Container ddev-redis-insight "
-docker container stop "$CONTAINER_ID" > /dev/null
-printf " Stopped\n"
-
-# printf " Container ddev-redis-insight "
-# docker container rm "$CONTAINER_ID" > /dev/null
-# printf " Removed\n"
+docker container rm "$CONTAINER_ID" > /dev/null
+printf " Removed\n"
